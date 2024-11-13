@@ -2,27 +2,21 @@
 namespace app\controllers;
 
 use app\core\BaseController;
+use app\core\DbConnection;
 use app\models\UserModel;
+use app\models\ProductModel;
+
 
 class UserController extends BaseController
 {
-    /*    public function userCreate()
-    {
-        return "User Created";
-    }
-
-    public function readUser()
-    {
-        $view = new View();
-        return $view->render("getUser", "main");
-    }
-    */
-
     public function readUser(){
+
         $model = new UserModel();
-        $model->email = "natalijajolovic@gmail.com";
-        $model->firstName = "natalija";
-        $model->lastName = "jolovic";
+        $result = $model->get();
+        $model->mapData($result);
+        echo "<pre>";
+        var_dump($model);
+        exit;
 
         $this->view->render('getUser', 'main', $model);
     }
